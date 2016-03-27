@@ -24,6 +24,11 @@ func Init(){
 	// Collection People
 	coll = session.DB("test").C("people")
 }
-func Create(user *company.Company) error {
 
+func Create(user *company.CompanyItem) error {
+	return coll.Insert(user)
+}
+
+func Read(id string) (*company.CompanyItem, error) {
+	return nil, nil
 }

@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-service Account {
+service Company {
 	rpc Create(CreateRequest) returns (CreateResponse) {}
 	rpc Read(ReadRequest) returns (ReadResponse) {}
 }
 
-message Company {
+message CompanyItem {
 	string id = 1; //uuid
 	string name = 2;
 	string owner = 3;
@@ -21,7 +21,7 @@ message Session {
 }
 
 message CreateRequest {
-	Company company = 1;
+	CompanyItem company = 1;
 }
 
 message CreateResponse {
@@ -39,11 +39,11 @@ message ReadRequest {
 }
 
 message ReadResponse {
-	Company company = 1;
+	CompanyItem company = 1;
 }
 
 message UpdateRequest {
-	Company company = 1;
+	CompanyItem company = 1;
 }
 
 message UpdateResponse {

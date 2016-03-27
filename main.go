@@ -4,10 +4,10 @@ import (
 	"log"
 
 	"github.com/micro/cli"
-	"github.com/micro/go-micro"
+	micro "github.com/micro/go-micro"
 	"github.com/saromanov/company-service/db"
 	"github.com/saromanov/company-service/handler"
-	proto "github.com/saromanov/company-service/proto/company"
+	"github.com/saromanov/company-service/proto/company"
 )
 
 func main() {
@@ -23,7 +23,7 @@ func main() {
 
 		micro.Action(func(c *cli.Context) {
 			if len(c.String("database_url")) > 0 {
-				db.Url = c.String("database_url")
+				//db.Url = c.String("database_url")
 			}
 		}),
 	)
@@ -31,7 +31,7 @@ func main() {
 	service.Init()
 	db.Init()
 
-	proto.RegisterAccountHandler(service.Server(), new(handler.Account))
+	company.RegisterCompanyHandler(service.Server(), new(handler.Company))
 
 	if err := service.Run(); err != nil {
 		log.Fatal(err)
