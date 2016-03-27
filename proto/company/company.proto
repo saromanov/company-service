@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+service Account {
+	rpc Create(CreateRequest) returns (CreateResponse) {}
+	rpc Read(ReadRequest) returns (ReadResponse) {}
+}
+
+message Company {
+	string id = 1; //uuid
+	string name = 2;
+	string owner = 3;
+	string about = 4;
+	string address = 5;
+}
+
+message Session {
+        string id = 1;
+        string username = 2;    
+        int64 created = 3;      // unix
+        int64 expires = 4;      // unix
+}
+
+message CreateRequest {
+	Company company = 1;
+}
+
+message CreateResponse {
+}
+
+message DeleteRequest {
+	string id = 1;
+}
+
+message DeleteResponse {
+}
+
+message ReadRequest {
+	string id = 1;
+}
+
+message ReadResponse {
+	Company company = 1;
+}
+
+message UpdateRequest {
+	Company company = 1;
+}
+
+message UpdateResponse {
+}
