@@ -2,6 +2,7 @@ package db
 
 import (
 	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 	company "github.com/saromanov/company-service/proto/company"
 )
 
@@ -25,10 +26,35 @@ func Init(){
 	coll = session.DB("test").C("people")
 }
 
-func Create(user *company.CompanyItem) error {
-	return coll.Insert(user)
+func Create(user *company.CompanyItem) (*company.CreateResponse, error) {
+	id := bson.NewObjectId()
+	comp := Company {
+		ID: id,
+		Name: user.Name,
+		Owner: user.Owner,
+	}
+
+	err := coll.Insert(comp)
+	if err != nil {
+		return nil, err
+	}
+
+	resp := &company.CreateResponse {
+		Id: id.Hex(),
+	}
+	return resp, err
 }
 
 func Read(id string) (*company.CompanyItem, error) {
-	return nil, nil
+	var comp Company
+	err := coll.Find(bson.M{"_id": bson.ObjectIdHex(id)}).One(&comp)
+	if err != nil {
+		return nil, err
+	}
+
+	item := &company.CompanyItem {
+		Name: comp.Name,
+		Owner: comp.Owner,
+	}
+	return item, nil
 }

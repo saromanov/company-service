@@ -12,8 +12,13 @@ import (
 
 type Company struct{}
 
-func (c*Company) Create(ctx context.Context, req *company.CreateRequest, rsp *company.CreateResponse) error {
-	return db.Create(req.Company)
+func (c*Company) Create(ctx context.Context, req *company.CreateRequest, rsp *company.CreateResponse) (error) {
+	resp, err := db.Create(req.Company)
+	if err != nil {
+		return err
+	}
+	rsp.Id = resp.Id
+	return nil
 }
 
 func (c*Company) Read(ctx context.Context, req *company.ReadRequest, rsp *company.ReadResponse) error {

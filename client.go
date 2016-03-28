@@ -21,8 +21,16 @@ func main() {
     rsp, err := greeter.Create(context.TODO(), &proto.CreateRequest{Company: req})
     if err != nil {
         fmt.Println(err)
+        return
     }
 
-    // Print response
-    fmt.Println(rsp)
+    // Read item
+
+    body, err := greeter.Read(context.TODO(), &proto.ReadRequest{Id: rsp.Id})
+    if err != nil {
+        fmt.Println(err)
+        return
+    }
+
+    fmt.Println(body)
 }
