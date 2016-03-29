@@ -1,0 +1,18 @@
+before_script:
+  - export GOPATH=$(pwd)
+  - GOPATH=$(pwd) go get -d ./...
+
+stages:
+  - build
+
+compile-go-1.5:
+  image: golang:1.5
+  stage: build
+  script:
+    - ./build.sh
+
+compile-go-1.6:
+  image: golang:1.6
+  stage: build
+  script:
+    - ./build.sh
