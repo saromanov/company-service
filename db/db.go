@@ -1,6 +1,7 @@
 package db
 
 import (
+	"fmt"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	company "github.com/saromanov/company-service/proto/company"
@@ -57,4 +58,12 @@ func Read(id string) (*company.CompanyItem, error) {
 		Owner: comp.Owner,
 	}
 	return item, nil
+}
+
+// Remove by profileid and company id
+func Remove(id string) error {
+	if !bson.IsObjectIdHex(id) {
+		return fmt.Errorf("%s is not a ObjectId value", id)
+	}
+	return coll.Remove(bson.M{"_id": bson.ObjectIdHex(id)})
 }
