@@ -29,3 +29,7 @@ func (c*Company) Read(ctx context.Context, req *company.ReadRequest, rsp *compan
 	rsp.Company = user
 	return nil
 }
+
+func (c*Company) Remove(ctx context.Context, req *company.DeleteRequest) error {
+	return db.Remove(req.Id)
+}
