@@ -16,7 +16,7 @@ func main() {
     // Create new greeter client
     greeter := proto.NewCompanyClient("go.micro.srv.company", service.Client())
 
-    req := &proto.CompanyItem{Name:"big"}
+    req := &proto.CompanyItem{Name:"big", Owner: "me"}
     // Call the greeter
     rsp, err := greeter.Create(context.TODO(), &proto.CreateRequest{Company: req})
     if err != nil {
