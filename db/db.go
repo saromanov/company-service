@@ -33,6 +33,9 @@ func Create(user *company.CompanyItem) (*company.CreateResponse, error) {
 		ID: id,
 		Name: user.Name,
 		Owner: user.Owner,
+		About: user.About,
+		City: user.City,
+		Address: user.Address,
 	}
 
 	err := coll.Insert(comp)
