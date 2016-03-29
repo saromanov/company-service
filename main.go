@@ -13,6 +13,7 @@ import (
 func main() {
 	service := micro.NewService(
 		micro.Name("go.micro.srv.company"),
+		micro.Version("latest"),
 		micro.Flags(
 			cli.StringFlag{
 				Name:   "database_url",
