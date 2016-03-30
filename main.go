@@ -29,7 +29,6 @@ func main() {
 
 		micro.Action(func(c *cli.Context) {
 			if len(c.String("database_url")) > 0 {
-				//db.Url = c.String("database_url")
 			}
 		}),
 	)
